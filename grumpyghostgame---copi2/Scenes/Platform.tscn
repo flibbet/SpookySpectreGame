@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://djnfls365aho1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6frqs"]
+size = Vector2(746, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ua7vw"]
+size = Vector2(2, 12.75)
+
+[node name="Platform" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+modulate = Color(1.21176, 1.2, 1.2, 0.156863)
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_6frqs")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(372, -18.375)
+shape = SubResource("RectangleShape2D_ua7vw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-372, -18.375)
+shape = SubResource("RectangleShape2D_ua7vw")

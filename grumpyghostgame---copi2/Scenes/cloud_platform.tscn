@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2fcehal85y7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xmsn"]
+size = Vector2(746, 93.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7ttc"]
+size = Vector2(746, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2548"]
+size = Vector2(2, 12.75)
+
+[node name="cloud_platform" type="Area2D"]
+
+[node name="CloudDetect" type="CollisionShape2D" parent="."]
+position = Vector2(0, -58.375)
+shape = SubResource("RectangleShape2D_2xmsn")
+
+[node name="Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+modulate = Color(1.21176, 1.2, 1.2, 0.156863)
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_o7ttc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision"]
+position = Vector2(372, -18.375)
+shape = SubResource("RectangleShape2D_o2548")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-372, -18.375)
+shape = SubResource("RectangleShape2D_o2548")

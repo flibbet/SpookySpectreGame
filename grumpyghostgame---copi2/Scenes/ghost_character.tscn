@@ -1,0 +1,138 @@
+[gd_scene load_steps=21 format=3 uid="uid://dxaydqukiv8lf"]
+
+[ext_resource type="Script" path="res://Scenes/ghost_character.gd" id="1_7w0pj"]
+[ext_resource type="Texture2D" uid="uid://d20q3dl73owed" path="res://Assets/Ghost/New Piskel (1).png" id="1_xkrgy"]
+[ext_resource type="Texture2D" uid="uid://b5a02b7yxx01y" path="res://Assets/Ghost/GhostCharacterLeft.png" id="2_txyj4"]
+[ext_resource type="Texture2D" uid="uid://3mosi3tj8t0a" path="res://Assets/Ghost/GhostCharacterRight.png" id="3_rwgld"]
+[ext_resource type="AudioStream" uid="uid://8454lhic2hvt" path="res://Assets/Sounds/explosion.wav" id="5_0jgpb"]
+[ext_resource type="AudioStream" uid="uid://b3y06lox8dkr7" path="res://Assets/Sounds/jump.wav" id="6_2flw6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iexjb"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2lnr"]
+atlas = ExtResource("1_xkrgy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6c0so"]
+atlas = ExtResource("1_xkrgy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvgf8"]
+atlas = ExtResource("1_xkrgy")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtvwk"]
+atlas = ExtResource("1_xkrgy")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nw4c"]
+atlas = ExtResource("2_txyj4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcgfv"]
+atlas = ExtResource("2_txyj4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uily6"]
+atlas = ExtResource("2_txyj4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmwbu"]
+atlas = ExtResource("2_txyj4")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfxa6"]
+atlas = ExtResource("3_rwgld")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qba1"]
+atlas = ExtResource("3_rwgld")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkm06"]
+atlas = ExtResource("3_rwgld")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3c3o"]
+atlas = ExtResource("3_rwgld")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kx3ei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2lnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6c0so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvgf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtvwk")
+}],
+"loop": true,
+"name": &"GhostIdle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nw4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcgfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uily6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmwbu")
+}],
+"loop": true,
+"name": &"GhostLeft",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfxa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qba1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkm06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3c3o")
+}],
+"loop": true,
+"name": &"GhostRight",
+"speed": 6.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_7w0pj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_iexjb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1.2, 1.2, 1.2, 1)
+scale = Vector2(0.792969, 0.792969)
+sprite_frames = SubResource("SpriteFrames_kx3ei")
+animation = &"GhostIdle"
+autoplay = "GhostIdle"
+frame_progress = 0.0963094
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0jgpb")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2flw6")
+pitch_scale = 1.34
+
+[node name="StepTimer" type="Timer" parent="."]

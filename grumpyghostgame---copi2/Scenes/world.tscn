@@ -1,0 +1,163 @@
+[gd_scene load_steps=14 format=4 uid="uid://dh8k4odd13nmx"]
+
+[ext_resource type="PackedScene" uid="uid://djnfls365aho1" path="res://Scenes/Platform.tscn" id="1_4r3lg"]
+[ext_resource type="PackedScene" uid="uid://dxaydqukiv8lf" path="res://Scenes/ghost_character.tscn" id="2_fec66"]
+[ext_resource type="Texture2D" uid="uid://bv02d7gj5x4db" path="res://Assets/Platforms/Cloud Canopy.png" id="3_11d6l"]
+[ext_resource type="PackedScene" uid="uid://d2fcehal85y7h" path="res://Scenes/cloud_platform.tscn" id="3_qdx3n"]
+[ext_resource type="Texture2D" uid="uid://b3ivh5kntfp0k" path="res://Assets/Platforms/Cloud.png" id="4_umxhy"]
+[ext_resource type="PackedScene" uid="uid://c547imw73m5rr" path="res://Scenes/parallax_background.tscn" id="5_bi7ag"]
+[ext_resource type="AudioStream" uid="uid://dmlhj1172njtm" path="res://Assets/Sounds/light-rain-109591.mp3" id="6_cciaj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2bfsy"]
+texture = ExtResource("3_11d6l")
+1:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+0:1/0 = 0
+0:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+5:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_krvak"]
+sources/0 = SubResource("TileSetAtlasSource_2bfsy")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ves0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_umxhy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_c5657"]
+offsets = PackedFloat32Array(0, 0.798507, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.522388, 0.522388, 0.522388, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8iq8y"]
+gradient = SubResource("Gradient_c5657")
+use_hdr = true
+
+[sub_resource type="Environment" id="Environment_bpwro"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_bloom = 0.15
+glow_blend_mode = 0
+fog_mode = 1
+fog_light_color = Color(0.547015, 0.547105, 0.576251, 1)
+fog_light_energy = 1.17
+fog_sun_scatter = 0.07
+fog_density = 1.0
+fog_height = 1.5
+fog_depth_curve = 0.732044
+volumetric_fog_density = 0.3342
+volumetric_fog_emission_energy = 356.71
+volumetric_fog_gi_inject = 3.4
+volumetric_fog_length = 66.15
+volumetric_fog_ambient_inject = 4.18
+adjustment_enabled = true
+adjustment_brightness = 0.53
+adjustment_contrast = 1.2
+adjustment_saturation = 2.0
+adjustment_color_correction = SubResource("GradientTexture1D_8iq8y")
+
+[node name="World" type="Node2D"]
+position = Vector2(596, 431)
+
+[node name="TileMaps" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMaps"]
+position = Vector2(1, -129)
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAD9/wIAAAAAAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAACAAAAAAD9/wMAAAAAAAIAAAD+/wMAAAABAAIAAAD//wMAAAABAAIAAAAAAAMAAAABAAIAAAABAAMAAAABAAIAAAACAAMAAAABAAIAAAADAAMAAAACAAIAAAA=")
+tile_set = SubResource("TileSet_krvak")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="TileMaps"]
+position = Vector2(981, -131)
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAD0//n/AAAAAAAAAAD0//r/AAAAAAIAAAD1//n/AAABAAAAAAD1//r/AAABAAIAAAD2//n/AAACAAAAAAD2//r/AAACAAIAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAIAAAAGAPv/AAABAAAAAAAGAPz/AAABAAIAAAAHAPv/AAACAAAAAAAHAPz/AAACAAIAAAD9//z/AAAAAAAAAAD9//3/AAAAAAIAAAD+//z/AAABAAAAAAD+//3/AAABAAIAAAAAAPz/AAACAAAAAAAAAP3/AAACAAIAAAD///z/AAABAAAAAAD///3/AAABAAIAAAA=")
+tile_set = SubResource("TileSet_krvak")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Floor1" parent="Platforms" instance=ExtResource("1_4r3lg")]
+position = Vector2(921, 341)
+scale = Vector2(0.4, 1)
+
+[node name="Floor2" parent="Platforms" instance=ExtResource("1_4r3lg")]
+position = Vector2(961, -1)
+
+[node name="Floor3" parent="Platforms" instance=ExtResource("1_4r3lg")]
+position = Vector2(501, 1065)
+
+[node name="Floor4" parent="Platforms" instance=ExtResource("1_4r3lg")]
+position = Vector2(1911, -41)
+
+[node name="Floor5" parent="Platforms" instance=ExtResource("1_4r3lg")]
+position = Vector2(2824, -92)
+
+[node name="Floor6" parent="Platforms" instance=ExtResource("1_4r3lg")]
+position = Vector2(3712, -125)
+
+[node name="cloud_platform" parent="Platforms" instance=ExtResource("3_qdx3n")]
+position = Vector2(26, 19)
+scale = Vector2(0.44, 1)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_fec66")]
+position = Vector2(1, -46)
+scale = Vector2(3, 3)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(-0.666667, 0)
+
+[node name="FadeContainer" type="Node2D" parent="."]
+position = Vector2(0, 50)
+
+[node name="FadeSprite" type="AnimatedSprite2D" parent="FadeContainer"]
+modulate = Color(1.1, 1.2, 1.2, 1)
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+light_mask = 7
+position = Vector2(-3, 44)
+scale = Vector2(0.0326458, 0.0352917)
+sprite_frames = SubResource("SpriteFrames_5ves0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="FadeContainer/FadeSprite"]
+environment = SubResource("Environment_bpwro")
+
+[node name="PointLight2D" type="PointLight2D" parent="FadeContainer/FadeSprite"]
+position = Vector2(30.6318, 85.0054)
+scale = Vector2(0.898531, 0.917255)
+energy = 0.15
+texture = ExtResource("4_umxhy")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="FadeContainer/FadeSprite"]
+position = Vector2(918.953, -1218.42)
+energy = 0.2
+shadow_enabled = true
+height = 0.6
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("5_bi7ag")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_cciaj")
+volume_db = -25.0
+pitch_scale = 0.68
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Platforms/cloud_platform" to="CharacterBody2D" method="_on_cloud_platform_body_entered"]

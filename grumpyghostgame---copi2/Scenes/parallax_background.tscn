@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://c547imw73m5rr"]
+
+[ext_resource type="Shader" path="res://fog.gdshader" id="1_0pcjb"]
+[ext_resource type="Shader" path="res://rain.gdshader" id="2_yev7a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o1s25"]
+noise_type = 5
+frequency = 0.0054
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vya1w"]
+width = 1152
+height = 648
+invert = true
+seamless = true
+noise = SubResource("FastNoiseLite_o1s25")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y5kyu"]
+shader = ExtResource("1_0pcjb")
+shader_parameter/density = 0.026
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_vya1w")
+
+[sub_resource type="Gradient" id="Gradient_po3ks"]
+offsets = PackedFloat32Array(0, 0.721311, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.204918, 0.204918, 0.204918, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c2fgc"]
+frequency = 0.0885
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1mo2p"]
+color_ramp = SubResource("Gradient_po3ks")
+noise = SubResource("FastNoiseLite_c2fgc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3d2q7"]
+shader = ExtResource("2_yev7a")
+shader_parameter/density = 0.075
+shader_parameter/speed = Vector2(0.01, -0.5)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_1mo2p")
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+layer = 2
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1152, 648)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxLayer"]
+material = SubResource("ShaderMaterial_y5kyu")
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 1150.0
+offset_bottom = 643.0
+color = Color(0.629, 0.775, 0.855, 1)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1152, 648)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxLayer2"]
+material = SubResource("ShaderMaterial_3d2q7")
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.588235, 1, 1, 1)
